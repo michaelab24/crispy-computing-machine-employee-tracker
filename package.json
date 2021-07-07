@@ -1,0 +1,24 @@
+{
+  "name": "crispy-computing-machine-employee-tracker",
+  "version": "1.0.0",
+  "description": "tracks employees",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michaelab24/crispy-computing-machine-employee-tracker.git"
+  },
+  "author": "Mikey B.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/michaelab24/crispy-computing-machine-employee-tracker/issues"
+  },
+  "homepage": "https://github.com/michaelab24/crispy-computing-machine-employee-tracker#readme",
+  "dependencies": {
+    "inquirer": "^8.1.1",
+    "sequelize": "^6.6.5"
+  }
+}
