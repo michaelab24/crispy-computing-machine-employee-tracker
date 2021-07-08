@@ -11,6 +11,8 @@ const userPrompts = () => {
     }])
 }
 
+userPrompts()
+
 
 const employeePrompts = () => {
      return inquirer.prompt([
@@ -38,4 +40,5 @@ const employeePrompts = () => {
         }
     ])
 }
+employeePrompts()
 
