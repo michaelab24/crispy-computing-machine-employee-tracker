@@ -1,15 +1,4 @@
 const connection = require("../config/connections");
+const fs = require("fs")
+const inquirer = require("inquirer");
 
-class Whatever {
-    constructor(connection){
-        this.connection = connection;
-    }
-
-findAllEmployees() {
-    return this.connection.promise().query(
-        "SELECT employee.id, dskjfsfd.mnameasdhasdkjhas,  "
-    )
-}
-}
-
-module.exports = new Whatever(connection)
