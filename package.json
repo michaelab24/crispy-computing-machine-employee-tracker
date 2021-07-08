@@ -18,7 +18,8 @@
   },
   "homepage": "https://github.com/michaelab24/crispy-computing-machine-employee-tracker#readme",
   "dependencies": {
+    "console.table": "^0.10.0",
     "inquirer": "^8.1.1",
-    "sequelize": "^6.6.5"
+    "mysql": "^2.18.1"
   }
 }
