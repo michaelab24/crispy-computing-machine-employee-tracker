@@ -3,7 +3,7 @@ const fs = require("fs")
 const inquirer = require("inquirer");
 
 const userPrompts = () => {
-    inquirer.prompt([{
+    return inquirer.prompt([{
         type: 'list',
         name: 'menu',
         message: 'Please choose from the following actions.',
@@ -13,7 +13,7 @@ const userPrompts = () => {
 
 
 const employeePrompts = () => {
-    inquirer.prompt([
+     return inquirer.prompt([
         {
             type: 'input',
             name: 'first_name',
@@ -31,15 +31,11 @@ const employeePrompts = () => {
             choices: ['1-Manager', '2-Assistang Manager', '3-Employee', '4-Intern']
         },
         {
-            type: 'input',
-            name: 'email',
-            message: "Please enter the engineer's email.",
-        },
-        {
-            type: 'input',
-            name: 'github',
-            message: "Please enter the engineer's github username.",
-        },
+            type: 'list',
+            name: 'employee_id',
+            message: "Please enter the employee/manager ID.",
+            choices: ['0', '1', '2', '3']
+        }
     ])
 }
 
