@@ -2,11 +2,12 @@
 const { log } = require("console");
 const { resolveSoa } = require("dns");
 const fs = require("fs")
-const inquirer = require("inquirer");
+const { prompt } = require("inquirer");
 const connection = require("./config/connections");
+const db = require("./db")
 
 const userPrompt = () => {
-    return inquirer.prompt([{
+    prompt([{
         type: 'list',
         name: 'action',
         message: 'Please choose from the following actions.',
@@ -74,7 +75,7 @@ function viewEmployees() {
 };
 
 const addEmployeePrompts = () => {
-    return inquirer.prompt([
+    prompt([
         {
             type: 'input',
             name: 'first_name',
@@ -100,36 +101,40 @@ const addEmployeePrompts = () => {
     ])
 }
 
-// const addDepartmentPrompt = () => {
-//     return inquirer.prompt([
-//         {
-//             type: 'list',
-//             name: 'addDepartment',
-//             message: "Would you like to add a new department?",
-//             choices: ['Yes', 'No']  
-//         }
-//     ]).then((answer) => {
-//         switch(answer.addDepartment) {
-//             case 'Yes':
-//                 theNewDepartment()
-//                 break;
-//             case 'No':
-//                 userPrompt()
-//                 break;
-//         }
-//     })
-// }
+const addDepartmentPrompt = () => {
+    prompt([
+        {
+            type: 'list',
+            name: 'addDepartment',
+            message: "Would you like to add a new department?",
+            choices: ['Yes', 'No']
+        }
+    ]).then((answer) => {
+        switch (answer.addDepartment) {
+            case 'Yes':
+                addNewDepartment()
+                break;
+            case 'No':
+                userPrompt()
+                break;
+        }
+    })
+}
 
-//const theNewDepartment = () => {
-    //     return inquirer.prompt([{
-//         type: 'input',
-//         name: 'newDeptartment',
-//         message: 'Please enter the name of your new department.'
-//     }]).then(answer.newDepartment.connection.query(`INSERT INTO department`,(err, result) => {
-//         console.table(result);
-//         return userPrompt();
-//     }))
-//}
+const addNewDepartment = () => {
+    prompt([
+        {
+            name: 'newDeptartment',
+            message: 'Please enter the name of your new department.'
+        }
+    ])
+        .then(res => {
+            let name = res
+            db.createDepartment(name)
+                .then(() => console.log(`Added ${name.name} to the database`))
+                .then(() => userPrompt())
+        })
+}
 userPrompt()
 
 
