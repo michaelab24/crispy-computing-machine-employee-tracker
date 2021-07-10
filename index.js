@@ -125,9 +125,9 @@ const addEmployeePrompts = () => {
 //         type: 'input',
 //         name: 'newDeptartment',
 //         message: 'Please enter the name of your new department.'
-//     }]).then(answer.newDepartment.dbData.query(`INSERT INTO department`,(err, result) => {
+//     }]).then(answer.newDepartment.connection.query(`INSERT INTO department`,(err, result) => {
 //         console.table(result);
-//         return userQuestions();
+//         return userPrompt();
 //     }))
 //}
 userPrompt()
