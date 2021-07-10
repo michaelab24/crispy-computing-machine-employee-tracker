@@ -11,7 +11,7 @@ database: "employees"
 
 
 
-dbData.connect(function (err) {
+connection.connect(function (err) {
     if (err) throw err
 });
 
