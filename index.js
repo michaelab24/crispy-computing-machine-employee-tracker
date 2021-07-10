@@ -45,7 +45,7 @@ function viewDepartments() {
     // Get Data - Query DB
     connection.query(`SELECT * FROM department`, (err, result) => {
         console.table(result);
-        return userPrompts()
+        return userPrompt()
     });
 
 };
@@ -53,14 +53,23 @@ function viewDepartments() {
 function viewRoles() {
     connection.query(`Select * FROM roles`, (err, result) => {
         console.table(result)
-        return userPrompts()
+        return userPrompt()
     });
 };
 
 function viewEmployees() {
-    connection.query(`Select * FROM employee`, (err, result) => {
+    connection.query(`SELECT 
+
+    employee.id, employee.first_name, employee.last_name, roles.title AS job_title, department.name AS department, roles.salary
+    
+    FROM employee 
+    
+    JOIN roles ON employee.role_id = roles.id
+    
+    JOIN department ON roles.department_id = department.id;
+    `, (err, result) => {
         console.table(result)
-        return userPrompts()
+        return userPrompt()
     });
 };
 
