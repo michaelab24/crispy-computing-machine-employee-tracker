@@ -1,10 +1,8 @@
-//const connection = require("../config/connections");
-const { log } = require("console");
-const { resolveSoa } = require("dns");
-const fs = require("fs")
 const { prompt } = require("inquirer");
-const connection = require("./config/connections");
-const db = require("./db")
+const db = require("./db/index");
+const dbConnect = require("./config/connections");
+const table = require('console');
+
 
 const userPrompt = () => {
     prompt([{
@@ -25,7 +23,7 @@ const userPrompt = () => {
                     viewEmployees();
                     break;
                 case 'Add a department':
-                    addDepartmentPrompt();
+                    addNewDepartment();
                     break;
                 case 'Add a role':
                     addRolesPrompt();
@@ -41,25 +39,34 @@ const userPrompt = () => {
 }
 
 
-//create table to view all departments
+
 function viewDepartments() {
-    // Get Data - Query DB
-    connection.query(`SELECT * FROM department`, (err, result) => {
+    dbConnect.query(`SELECT * FROM department`, (err, result) => {
         console.table(result);
         return userPrompt()
     });
 
 };
 
+// function viewDepartments() {
+//     db.viewAllDepartments()
+//     .then(([rows]) => {
+//         let departments = rows
+//         console.log('\n')
+//         console.table(departments)
+//     })
+//     .then(() => userPrompt()) 
+// };
+
 function viewRoles() {
-    connection.query(`Select * FROM roles`, (err, result) => {
+    dbConnect.query(`Select * FROM roles`, (err, result) => {
         console.table(result)
         return userPrompt()
     });
 };
 
 function viewEmployees() {
-    connection.query(`SELECT 
+    dbConnect.query(`SELECT 
 
     employee.id, employee.first_name, employee.last_name, roles.title AS job_title, department.name AS department, roles.salary
     
@@ -73,6 +80,18 @@ function viewEmployees() {
         return userPrompt()
     });
 };
+
+
+// no bueno
+// function viewEmployees() {
+//     db.selectAllEmployees()
+//     .then (([rows]) => {
+//         let employees = rows
+//         console.log("\n")
+//         console.table(employees)
+//     })
+//     .then(() => userPrompt())
+// }
 
 const addEmployeePrompts = () => {
     prompt([
@@ -101,40 +120,28 @@ const addEmployeePrompts = () => {
     ])
 }
 
-const addDepartmentPrompt = () => {
-    prompt([
-        {
-            type: 'list',
-            name: 'addDepartment',
-            message: "Would you like to add a new department?",
-            choices: ['Yes', 'No']
-        }
-    ]).then((answer) => {
-        switch (answer.addDepartment) {
-            case 'Yes':
-                addNewDepartment()
-                break;
-            case 'No':
-                userPrompt()
-                break;
-        }
-    })
-}
+// const addDepartmentPrompt = () => {
+//     prompt([
+//         {
+//             type: 'list',
+//             name: 'addDepartment',
+//             message: "Would you like to add a new department?",
+//             choices: ['Yes', 'No']
+//         }
+//     ]).then((answer) => {
+//         switch (answer.addDepartment) {
+//             case 'Yes':
+//                 addNewDepartment()
+//                 break;
+//             case 'No':
+//                 userPrompt()
+//                 break;
+//         }
+//     })
+// }
 
-const addNewDepartment = () => {
-    prompt([
-        {
-            name: 'newDeptartment',
-            message: 'Please enter the name of your new department.'
-        }
-    ])
-        .then(res => {
-            let name = res
-            db.createDepartment(name)
-                .then(() => console.log(`Added ${name.name} to the database`))
-                .then(() => userPrompt())
-        })
-}
+// 
+
 userPrompt()
 
 
