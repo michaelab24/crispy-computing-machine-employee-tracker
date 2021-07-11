@@ -5,6 +5,8 @@
 
 This command line application is used by a company to track its employees. Upon opening the application you are presented with a a series of actions that you can select from. When hitting any of the view options, you are presented with a table that either shows all of your current employees, current departments, or view the current roles within the company. Unfortunately upon selecting any of the add functions, these currently do not work. Sadness. But this app does function with no errors and will still allow you to view your current roster.
 
+GitHub: https://github.com/michaelab24/crispy-computing-machine-employee-tracker
+
 ## Table of Contents
 * [Installation](#installation)
 * [Usage](#usage)
