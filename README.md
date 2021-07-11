@@ -19,7 +19,7 @@ GitHub: https://github.com/michaelab24/crispy-computing-machine-employee-tracker
 
 ## Installation
 
-user needs an npm install and to run node index in the command line to show prompt.
+User needs an npm install and then run node index in the command line to order to show prompt.
 
 ## Usage 
 
