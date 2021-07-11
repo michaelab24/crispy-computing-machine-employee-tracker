@@ -29,6 +29,12 @@ VALUES
 ('Al', 'Robinson', 3, 1),
 ('Blade', 'Vampkill', 7, 2),
 ('Michael', 'Jordan', 4, 1),
-('Scotty', 'Upshall', 8, 2);
+('Scottie', 'Upshall', 8, 2),
+('Auston', 'Matthews', 3, 2),
+('Brett', 'Hull', 7, 1),
+('Ewan', 'McGregor', 6, 2),
+('PK', 'Subban', 2, 1),
+('Pekka', 'Rinne', 8, 2),
+('Philip', 'Foresburg', 3, 1);
 
 

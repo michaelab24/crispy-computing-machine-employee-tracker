@@ -23,7 +23,7 @@ const userPrompt = () => {
                     viewEmployees();
                     break;
                 case 'Add a department':
-                    addNewDepartment();
+                    addDepartmentPrompt();
                     break;
                 case 'Add a role':
                     addRolesPrompt();
@@ -93,54 +93,116 @@ function viewEmployees() {
 //     .then(() => userPrompt())
 // }
 
+// const addEmployeePrompts = () => {
+//     prompt([
+//         {
+//             type: 'input',
+//             name: 'first_name',
+//             message: "What's the first name of the employee?",
+//         },
+//         {
+//             type: 'input',
+//             name: 'last_name',
+//             message: "What's the last name of the employee?",
+//         },
+//         {
+//             type: 'list',
+//             name: 'role_id',
+//             message: "Please enter the employee's role ID.",
+//             choices: ['1-Manager', '2-Assistang Manager', '3-Employee', '4-Intern']
+//         },
+//         {
+//             type: 'list',
+//             name: 'employee_id',
+//             message: "Please enter the employee/manager ID.",
+//             choices: ['0', '1', '2', '3']
+//         }
+//     ])
+// }
+
+const addDepartmentPrompt = () => {
+    prompt([
+        {
+            type: 'list',
+            name: 'addDepartment',
+            message: "Would you like to add a new department?",
+            choices: ['Yes', 'No']
+        }
+    ]).then((answer) => {
+        switch (answer.addDepartment) {
+            case 'Yes':
+                console.log('Unfortunately this section of the app is under maintenance, sorry for the inconvenience')
+                userPrompt()
+                break;
+            case 'No':
+                userPrompt()
+                break;
+        }
+    })
+}
+
+const addRolesPrompt = () => {
+    prompt([
+        {
+            type: 'list',
+            name: 'addRole',
+            message: "Would you like to add a new role to your company?",
+            choices: ['Yes', 'No']
+        }
+    ]).then((answer) => {
+        switch (answer.addRole) {
+            case 'Yes':
+                console.log('Unfortunately this section of the app is under maintenance, sorry for the inconvenience')
+                userPrompt()
+                break;
+            case 'No':
+                userPrompt()
+                break;
+        }
+    })
+}
+
 const addEmployeePrompts = () => {
     prompt([
         {
-            type: 'input',
-            name: 'first_name',
-            message: "What's the first name of the employee?",
-        },
-        {
-            type: 'input',
-            name: 'last_name',
-            message: "What's the last name of the employee?",
-        },
-        {
             type: 'list',
-            name: 'role_id',
-            message: "Please enter the employee's role ID.",
-            choices: ['1-Manager', '2-Assistang Manager', '3-Employee', '4-Intern']
-        },
-        {
-            type: 'list',
-            name: 'employee_id',
-            message: "Please enter the employee/manager ID.",
-            choices: ['0', '1', '2', '3']
+            name: 'addEmployee',
+            message: "Would you like to add a new employee to your company?",
+            choices: ['Yes', 'No']
         }
-    ])
+    ]).then((answer) => {
+        switch (answer.addEmployee) {
+            case 'Yes':
+                console.log('Unfortunately this section of the app is under maintenance, sorry for the inconvenience')
+                userPrompt()
+                break;
+            case 'No':
+                userPrompt()
+                break;
+        }
+    })
 }
 
-// const addDepartmentPrompt = () => {
-//     prompt([
-//         {
-//             type: 'list',
-//             name: 'addDepartment',
-//             message: "Would you like to add a new department?",
-//             choices: ['Yes', 'No']
-//         }
-//     ]).then((answer) => {
-//         switch (answer.addDepartment) {
-//             case 'Yes':
-//                 addNewDepartment()
-//                 break;
-//             case 'No':
-//                 userPrompt()
-//                 break;
-//         }
-//     })
-// }
-
-// 
+const updateEmployeePrompt = () => {
+    prompt([
+        {
+            type: 'list',
+            name: 'updateEmployee',
+            message: "Would you like to update a current employee in your company?",
+            choices: ['Yes', 'No']
+        }
+    ]).then((answer) => {
+        switch (answer.updateEmployee) {
+            case 'Yes':
+                console.log('Unfortunately this section of the app is under maintenance, sorry for the inconvenience, sorry for the inconvenience')
+                userPrompt()
+                break;
+            case 'No':
+                userPrompt()
+                break;
+        }
+    })
+}
 
 userPrompt()
 
