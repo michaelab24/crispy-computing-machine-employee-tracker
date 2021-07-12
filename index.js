@@ -2,6 +2,7 @@ const { prompt } = require("inquirer");
 const db = require("./db/index");
 const dbConnect = require("./config/connections");
 const table = require('console');
+const inquirer = require("inquirer");
 
 
 const userPrompt = () => {
@@ -23,7 +24,7 @@ const userPrompt = () => {
                     viewEmployees();
                     break;
                 case 'Add a department':
-                    addDepartmentPrompt();
+                    addDepartment();
                     break;
                 case 'Add a role':
                     addRolesPrompt();
@@ -48,16 +49,6 @@ function viewDepartments() {
 
 };
 
-// function viewDepartments() {
-//     db.viewAllDepartments()
-//     .then(([rows]) => {
-//         let departments = rows
-//         console.log('\n')
-//         console.table(departments)
-//     })
-//     .then(() => userPrompt()) 
-// };
-
 function viewRoles() {
     dbConnect.query(`Select * FROM roles`, (err, result) => {
         console.table(result)
@@ -81,6 +72,120 @@ function viewEmployees() {
     });
 };
 
+function addDepartment() {
+    inquirer
+        .prompt([
+            {
+                name: "departmentName",
+                type: "input",
+                message: "New Department Name: ",
+            },
+        ])
+        .then(function (response) {
+            dbConnect.query("INSERT INTO department SET ?", {
+                name: response.departmentName,
+            },
+                function (err) {
+                    if (err) throw err;
+                    userPrompt();
+                }
+            );
+        });
+};
+
+function addRolesPrompt() {
+    inquirer
+        .prompt([
+            {
+                name: "roleName",
+                type: "input",
+                message: "New Role Title:  ",
+            },
+            {
+                name: "roleSalary",
+                type: "input",
+                message: "New Role Salary: ",
+            },
+            {
+                name: "roleDepartment",
+                type: "input",
+                message: "New Role Department ID: ",
+            }
+
+        ])
+
+        .then(function (response) {
+            dbConnect.query("INSERT INTO roles SET ?", {
+                title: response.roleName,
+                salary: response.roleSalary,
+                department_id: response.roleDepartment
+            },
+                function (err) {
+                    if (err) throw err;
+                    userPrompt();
+                }
+            );
+        })
+};
+
+function addEmployeePrompts() {
+    inquirer
+        .prompt([
+            {
+                name: "firstName",
+                type: "input",
+                message: "Employee first name: "
+            },
+            {
+                name: "lastName",
+                type: "input",
+                message: "Employee last name: "
+            },
+            {
+                name: "employeeRole",
+                type: "input",
+                message: "Employee Role ID: "
+            },
+            {
+                name: "employeeManager",
+                type: "input",
+                message: "Employee Manager ID: "
+            }
+        ])
+
+        .then(function (response) {
+            dbConnect.query("INSERT INTO employee SET ?", {
+                first_name: response.firstName,
+                last_name: response.lastName,
+                role_id: response.employeeRole,
+                manager_id: response.employeeManager,
+            },
+                function (err) {
+                    if (err) throw err;
+                    userPrompt();
+                }
+            );
+        });
+}
+
+const updateEmployeePrompt = () => {
+    console.log('Unfortunately this section of the app is under maintenance, sorry for the inconvenience')
+    return userPrompt()
+}
+   
+
+userPrompt()
+
+
+// function viewDepartments() {
+//     db.viewAllDepartments()
+//     .then(([rows]) => {
+//         let departments = rows
+//         console.log('\n')
+//         console.table(departments)
+//     })
+//     .then(() => userPrompt()) 
+// };
 
 // no bueno
 // function viewEmployees() {
@@ -119,91 +224,4 @@ function viewEmployees() {
 //         }
 //     ])
 // }
-
-const addDepartmentPrompt = () => {
-    prompt([
-        {
-            type: 'list',
-            name: 'addDepartment',
-            message: "Would you like to add a new department?",
-            choices: ['Yes', 'No']
-        }
-    ]).then((answer) => {
-        switch (answer.addDepartment) {
-            case 'Yes':
-                console.log('Unfortunately this section of the app is under maintenance, sorry for the inconvenience')
-                userPrompt()
-                break;
-            case 'No':
-                userPrompt()
-                break;
-        }
-    })
-}
-
-const addRolesPrompt = () => {
-    prompt([
-        {
-            type: 'list',
-            name: 'addRole',
-            message: "Would you like to add a new role to your company?",
-            choices: ['Yes', 'No']
-        }
-    ]).then((answer) => {
-        switch (answer.addRole) {
-            case 'Yes':
-                console.log('Unfortunately this section of the app is under maintenance, sorry for the inconvenience')
-                userPrompt()
-                break;
-            case 'No':
-                userPrompt()
-                break;
-        }
-    })
-}
-
-const addEmployeePrompts = () => {
-    prompt([
-        {
-            type: 'list',
-            name: 'addEmployee',
-            message: "Would you like to add a new employee to your company?",
-            choices: ['Yes', 'No']
-        }
-    ]).then((answer) => {
-        switch (answer.addEmployee) {
-            case 'Yes':
-                console.log('Unfortunately this section of the app is under maintenance, sorry for the inconvenience')
-                userPrompt()
-                break;
-            case 'No':
-                userPrompt()
-                break;
-        }
-    })
-}
-
-const updateEmployeePrompt = () => {
-    prompt([
-        {
-            type: 'list',
-            name: 'updateEmployee',
-            message: "Would you like to update a current employee in your company?",
-            choices: ['Yes', 'No']
-        }
-    ]).then((answer) => {
-        switch (answer.updateEmployee) {
-            case 'Yes':
-                console.log('Unfortunately this section of the app is under maintenance, sorry for the inconvenience, sorry for the inconvenience')
-                userPrompt()
-                break;
-            case 'No':
-                userPrompt()
-                break;
-        }
-    })
-}
-
-userPrompt()
-
 
